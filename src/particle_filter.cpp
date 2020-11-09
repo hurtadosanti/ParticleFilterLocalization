@@ -12,9 +12,9 @@
 #include <iostream>
 #include <iterator>
 #include <numeric>
-#include <random>
 #include <string>
 #include <vector>
+#include <random>
 
 #include "helper_functions.h"
 
@@ -23,10 +23,8 @@ using std::vector;
 using std::normal_distribution;
 
 void ParticleFilter::init(double x, double y, double theta, double std[]) {
-
     std::random_device r;
     std::default_random_engine gen(r());
-
     normal_distribution<double> dist_x(x, std[0]);
     normal_distribution<double> dist_y(y, std[1]);
     normal_distribution<double> dist_theta(theta, std[2]);
@@ -49,14 +47,28 @@ void ParticleFilter::init(double x, double y, double theta, double std[]) {
 
 void ParticleFilter::prediction(double delta_t, double std_pos[],
                                 double velocity, double yaw_rate) {
+    std::random_device r;
+    std::default_random_engine gen(r());
+    normal_distribution<double> dist_x(0, std_pos[0]);
+    normal_distribution<double> dist_y(0, std_pos[1]);
+    normal_distribution<double> dist_theta(0, std_pos[2]);
     /**
-     * TODO: Add measurements to each particle and add random Gaussian noise.
-     * NOTE: When adding noise you may find std::normal_distribution
-     *   and std::default_random_engine useful.
-     *  http://en.cppreference.com/w/cpp/numeric/random/normal_distribution
-     *  http://www.cplusplus.com/reference/random/default_random_engine/
+     * Add measurements to each particle and add random Gaussian noise.
      */
-
+    if(abs(yaw_rate)>0){
+        for(int i=0;i<num_particles;++i){
+            // Updating
+            auto p = particles[i];
+            auto x_f = p.x+(velocity/yaw_rate)*(sin(p.theta+yaw_rate*delta_t)-sin(p.theta));
+            auto y_f =p.y+(velocity/yaw_rate)*(cos(p.theta)-cos(p.theta+yaw_rate*delta_t));
+            auto theta_f=p.theta+yaw_rate*delta_t;
+            particles[i].x = x_f+dist_x(gen);
+            particles[i].y = y_f+dist_y(gen);
+            particles[i].theta = theta_f+dist_theta(gen);
+        }
+    }else{
+        std::cout<<"yaw = 0"<<std::endl;
+    }
 }
 
 void ParticleFilter::dataAssociation(vector<LandmarkObs> predicted,
@@ -76,7 +88,7 @@ void ParticleFilter::updateWeights(double sensor_range, double std_landmark[],
                                    const vector<LandmarkObs> &observations,
                                    const Map &map_landmarks) {
     /**
-     * TODO: Update the weights of each particle using a mult-variate Gaussian
+     * TODO: Update the weights of each particle using a multi-variate Gaussian
      *   distribution. You can read more about this distribution here:
      *   https://en.wikipedia.org/wiki/Multivariate_normal_distribution
      * NOTE: The observations are given in the VEHICLE'S coordinate system.
@@ -88,6 +100,9 @@ void ParticleFilter::updateWeights(double sensor_range, double std_landmark[],
      *   and the following is a good resource for the actual equation to implement
      *   (look at equation 3.33) http://planning.cs.uiuc.edu/node99.html
      */
+     for(int i=0;i<num_particles;++i){
+
+     }
 
 }
 
