@@ -69,6 +69,13 @@ Optional message data used for debugging particle's sensing and associations
 [Google's C++ style guide](https://google.github.io/styleguide/cppguide.html)
 
 ### Build
+#### Linux
+There are three scripts provided to build and run the server:
+
+- clean.sh
+- build.sh
+
+#### Docker
 To build, compile and run the code we use a [docker image](Dockerfile) together with CLion.
 - To build the image run
 
@@ -82,10 +89,13 @@ The code can be copy using ssh, then use cmake to setup and make to build. Final
 
 For more details of the Clion integration go to the post 
 [Using Docker with CLion](https://blog.jetbrains.com/clion/2020/01/using-docker-with-clion/)
+#### Execute
+
+- Execute the [run.sh](run.sh) script
+- Run the [Term 2 Simulator](https://github.com/udacity/self-driving-car-sim/releases) and select the **Project 3**.
 
 ## References
 - [Project Definition](https://github.com/udacity/CarND-Kidnapped-Vehicle-Project)
-- This project involves the [Term 2 Simulator](https://github.com/udacity/self-driving-car-sim/releases)
 
 ## License
 MIT License Copyright (c) 2016-2018 Udacity, Inc.
