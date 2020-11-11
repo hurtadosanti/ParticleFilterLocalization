@@ -70,10 +70,10 @@ Optional message data used for debugging particle's sensing and associations
 
 ### Build
 #### Linux
-There are three scripts provided to build and run the server:
+There are two scripts provided to build and clean the server:
 
-- clean.sh
-- build.sh
+- [Clean binaries](clean.sh)
+- [Build binary](build.sh)
 
 #### Docker
 To build, compile and run the code we use a [docker image](Dockerfile) together with CLion.
