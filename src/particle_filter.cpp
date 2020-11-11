@@ -14,8 +14,6 @@
 #include <vector>
 #include <random>
 
-#include "helper_functions.h"
-
 using std::string;
 using std::vector;
 using std::normal_distribution;
@@ -55,7 +53,7 @@ void ParticleFilter::prediction(double delta_t, double std_pos[],
     * Add measurements to each particle and add random Gaussian noise.
     */
     for (auto &p: particles) {
-        if (abs(yaw_rate) < 0) {
+        if (fabs(yaw_rate) < 0.0001) {
             // avoid division by 0
             p.x += velocity * delta_t * cos(p.theta);
             p.y += velocity * delta_t * sin(p.theta);
@@ -72,6 +70,7 @@ void ParticleFilter::prediction(double delta_t, double std_pos[],
 
 void ParticleFilter::dataAssociation(vector<LandmarkObs> predicted,
                                      vector<LandmarkObs> &observations) {
+    // Find closest observation to prediction
     for (auto &o: observations) {
         auto minimal_distance = std::numeric_limits<double>::max();
         for (const auto &p: predicted) {
