@@ -121,6 +121,9 @@ private:
 
     // Vector of weights of all particles
     std::vector<double> weights;
+
+    double multivariate_prob(double sig_x, double sig_y, double x_obs, double y_obs,
+                             double mu_x, double mu_y);
 };
 
 #endif  // PARTICLE_FILTER_H_

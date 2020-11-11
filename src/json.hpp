@@ -1676,7 +1676,7 @@ Format](http://rfc7159.net/rfc7159)
                     default: {
                         if (t == value_t::null) {
                             JSON_THROW(std::domain_error(
-                                    "961c151d2e87f2686a955a9be24d316f1362bf21 2.1.1")); // LCOV_EXCL_LINE
+                                               "961c151d2e87f2686a955a9be24d316f1362bf21 2.1.1")); // LCOV_EXCL_LINE
                         }
                         break;
                     }
@@ -2253,7 +2253,7 @@ Format](http://rfc7159.net/rfc7159)
 
                 default: {
                     JSON_THROW(std::domain_error(
-                            "cannot use construct with iterators from " + first.m_object->type_name()));
+                                       "cannot use construct with iterators from " + first.m_object->type_name()));
                 }
             }
 
@@ -6855,8 +6855,8 @@ Format](http://rfc7159.net/rfc7159)
 
                     default: {
                         JSON_THROW(std::invalid_argument(
-                                "error parsing a msgpack @ " + std::to_string(current_idx) + ": " +
-                                std::to_string(static_cast<int>(v[current_idx]))));
+                                           "error parsing a msgpack @ " + std::to_string(current_idx) + ": " +
+                                           std::to_string(static_cast<int>(v[current_idx]))));
                     }
                 }
             }
@@ -11299,7 +11299,7 @@ Format](http://rfc7159.net/rfc7159)
                                 if (static_cast<size_type>(idx) > parent.size()) {
                                     // avoid undefined behavior
                                     JSON_THROW(std::out_of_range(
-                                            "array index " + std::to_string(idx) + " is out of range"));
+                                                       "array index " + std::to_string(idx) + " is out of range"));
                                 } else {
                                     // default case: insert add offset
                                     parent.insert(parent.begin() + static_cast<difference_type>(idx), val);
